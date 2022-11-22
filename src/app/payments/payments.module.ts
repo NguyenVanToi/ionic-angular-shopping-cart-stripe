@@ -1,3 +1,4 @@
+import { UserService } from './../_services/user.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -10,8 +11,8 @@ import { PaymentsPage } from './payments.page';
 const routes: Routes = [
   {
     path: '',
-    component: PaymentsPage
-  }
+    component: PaymentsPage,
+  },
 ];
 
 @NgModule({
@@ -19,8 +20,9 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ],
-  declarations: [PaymentsPage]
+  declarations: [PaymentsPage],
+  providers: [UserService],
 })
 export class PaymentsPageModule {}

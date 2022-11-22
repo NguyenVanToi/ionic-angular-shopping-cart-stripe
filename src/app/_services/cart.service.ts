@@ -3,45 +3,31 @@ import { Product } from '../models/cart.model';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
-
   data: Product[] = [
-    { id: 1,
-      name: 'Call Of Duty - 2019',
-      price: 4000,
-      qty: 1
-    },
-    { id: 2,
-      name: 'Spiderman - 2019',
-      price: 3000,
-      qty: 1
-    },
-    { id: 3,
-      name: 'Mortal Kombat 11 - 2019',
-      price: 4000,
-      qty: 1
-    }
-  ]
+    { id: 1, name: 'Call Of Duty - 2019', price: 400, qty: 1 },
+    { id: 2, name: 'Spiderman - 2019', price: 300, qty: 1 },
+    { id: 3, name: 'Mortal Kombat 11 - 2019', price: 250, qty: 1 },
+  ];
 
-  private cart = []
+  private cart = [];
   private cartItemCount = new BehaviorSubject(0);
-  
-  
-  constructor() { }
 
-  getProducts(){
+  constructor() {}
+
+  getProducts() {
     return this.data;
   }
 
-  getCart(){
+  getCart() {
     return this.cart;
   }
 
   getCartItemCount(): BehaviorSubject<number> {
-		return this.cartItemCount;
-	}
+    return this.cartItemCount;
+  }
 
   addProduct(product) {
     let added = false;
@@ -58,25 +44,25 @@ export class CartService {
     }
     this.cartItemCount.next(this.cartItemCount.value + 1);
   }
- 
+
   decreaseProduct(product) {
     for (const [index, item] of this.cart.entries()) {
-			if (item.id === product.id) {
-				item.qty -= 1;
-				if (item.qty === 0) {
-					this.cart.splice(index, 1);
-				}
-			}
-		}
-		this.cartItemCount.next(this.cartItemCount.value - 1);
+      if (item.id === product.id) {
+        item.qty -= 1;
+        if (item.qty === 0) {
+          this.cart.splice(index, 1);
+        }
+      }
+    }
+    this.cartItemCount.next(this.cartItemCount.value - 1);
   }
- 
+
   removeProduct(product) {
     for (const [index, item] of this.cart.entries()) {
-			if (item.id === product.id) {
-				this.cartItemCount.next(this.cartItemCount.value - item.qty);
-				this.cart.splice(index, 1);
-			}
-		}
+      if (item.id === product.id) {
+        this.cartItemCount.next(this.cartItemCount.value - item.qty);
+        this.cart.splice(index, 1);
+      }
+    }
   }
 }

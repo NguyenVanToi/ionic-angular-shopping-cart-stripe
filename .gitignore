@@ -4,3 +4,8 @@ plugins
 www
 .DS_Store
 src/.DS_Store
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
+android

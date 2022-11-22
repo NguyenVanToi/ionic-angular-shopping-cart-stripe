@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "shopping-cart-bfc72": {
+      "hosting": {
+        "app": [
+          "shopping-cart-bfc72"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "shopping-cart-bfc72"
+  }
+}

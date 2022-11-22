@@ -10,39 +10,31 @@ import { CartviewPage } from '../cartview/cartview.page';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
-
   cart = [];
   products = [];
   cartItemCount: BehaviorSubject<number>;
 
- 
+  constructor(
+    private cartService: CartService,
+    private modalCtrl: ModalController
+  ) {}
 
-  constructor(private cartService: CartService, private modalCtrl: ModalController) {}
-
-  ngOnInit(){
+  ngOnInit() {
     this.products = this.cartService.getProducts();
     this.cart = this.cartService.getCart();
     this.cartItemCount = this.cartService.getCartItemCount();
-
   }
 
   addToCart(product) {
     this.cartService.addProduct(product);
-    
   }
- 
+
   async openCart() {
-   
     let modal = await this.modalCtrl.create({
       component: CartviewPage,
-      cssClass: 'cart-modal'
+      cssClass: 'cart-modal',
     });
-    modal.onWillDismiss().then(() => {
-      
-    });
+    modal.onWillDismiss().then(() => {});
     modal.present();
   }
- 
-  
-
 }
